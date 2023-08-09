@@ -1,6 +1,8 @@
 'use client';
 import Card from "./components/Card";
+import SearchBar from "./components/SearchBar";
 import Image from "next/image";
+// import { Cards } from 'mtgsdk-ts';
 
 export default function Home() {
   return (
@@ -12,6 +14,7 @@ export default function Home() {
         height={0}
         alt='Magic: The Gathering logo'
       />
+      <SearchBar />
       <Card />
     </main>
   )
