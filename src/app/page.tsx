@@ -5,14 +5,22 @@ import Image from 'next/image';
 import Card from './components/Card';
 import CardBack from './components/CardBack';
 import SearchBar from './components/SearchBar';
-import { CardInfo } from './types/CardInfo';
+import { useCardContext } from './cardProvider';
+import { Cards } from 'mtgsdk-ts';
 
 export default function Home() {
-	const [search, setSearch] = useState('');
+	const { search, setSearch, setCurrentCard } = useCardContext();
 	const [flip, setFlip] = useState(false);
 
-	function searchClick(search: string): void {
+	async function searchClick(search: string): Promise<void> {
 		setSearch(search);
+		const fetchCard = await Cards.where({ name: search });
+		if (fetchCard !== undefined) {
+			const { name, manaCost, cmc, colors, type, rarity, power, toughness, set, text, id } = fetchCard[0];
+			setCurrentCard(
+				{ name, manaCost, cmc, colors, type, rarity, power, toughness, set, text, id }
+			);
+		}
 	}
 
 	return (
@@ -25,8 +33,6 @@ export default function Home() {
 				alt='Magic: The Gathering logo'
 			/>
 			<SearchBar
-				search={ search }
-				setSearch={ setSearch }
 				searchClick={ searchClick }
 			/>
 			{ flip === false

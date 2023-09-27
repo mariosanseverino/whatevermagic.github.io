@@ -1,5 +1,6 @@
 import './globals.css';
-
+import React from 'react';
+import { CardProvider } from './cardProvider';
 
 export const metadata = {
 	title: 'Whatever Magic!',
@@ -12,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 	return (
-		<html lang="en">
-			<body>{children}</body>
-		</html>
+		<CardProvider>
+			<html lang="en">
+				<body>{children}</body>
+			</html>
+		</CardProvider>
 	);
 }

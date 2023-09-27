@@ -9,4 +9,5 @@ export type CardInfo = {
     toughness: string,
     set: string,
     text: string,
+    id: string,
 }

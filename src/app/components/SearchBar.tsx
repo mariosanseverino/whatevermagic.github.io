@@ -1,14 +1,13 @@
 'use client';
 import React from 'react';
+import { useState } from 'react';
 
 interface SearchBarProps {
-    search: string,
-    setSearch: React.Dispatch<React.SetStateAction<string>>,
     searchClick(search: string): void,
 }
 
-export default function SearchBar({ search, setSearch, searchClick }: SearchBarProps) {
-
+export default function SearchBar({ searchClick }: SearchBarProps) {
+	const [currentSearch, setCurrentSearch] = useState('');
 
 	return (
 		<form className="w-full my-4 text-center">
@@ -18,12 +17,13 @@ export default function SearchBar({ search, setSearch, searchClick }: SearchBarP
 				type="text"
 				placeholder="Card name"
 				className="bg-black"
-				onChange={ ({ target: { value } }) => setSearch(value) }
+				onChange={ ({ target: { value } }) => setCurrentSearch(value) }
+				value={ currentSearch }
 			/>
 			<button
 				type="button"
 				className="bg-slate-700 py-1 px-2 rounded-md"
-				onClick={ () => searchClick(search) }
+				onClick={ () => searchClick(currentSearch) }
 			>
                 Search
 			</button>

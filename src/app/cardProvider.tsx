@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
 	Dispatch,
@@ -17,6 +18,7 @@ type CardContextProps = {
     search: string,
     setSearch: Dispatch<SetStateAction<string>>,
 	currentCard: CardInfo,
+	setCurrentCard: Dispatch<SetStateAction<CardInfo>>,
 }
 
 export const CardContext = createContext({
@@ -24,26 +26,29 @@ export const CardContext = createContext({
 	setSearch: () => {},
 	currentCard: {
 	} as CardInfo,
+	setCurrentCard: () => {},
 } as CardContextProps);
 
 export function CardProvider({ children }: ProviderProps) {
 	const [search, setSearch] = useState('');
+	const [currentCard, setCurrentCard] = useState({
+		name: 'Henrika Domnathi // Henrika, Infernal Seer',
+		manaCost: '{2}{B}{B}',
+		cmc: 4,
+		colors: [ 'B' ],
+		type: 'Legendary Creature — Vampire',
+		rarity: 'Mythic',
+		power: '1',
+		toughness: '3',	
+		set: 'VOW',
+		text: 'Flying, deathtouch, lifelink'	
+	});
 
 	const cardSettings = {
 		search,
 		setSearch,
-		currentCard: {
-			name: 'Henrika Domnathi // Henrika, Infernal Seer',
-			manaCost: '{2}{B}{B}',
-			cmc: 4,
-			colors: [ 'B' ],
-			type: 'Legendary Creature — Vampire',
-			rarity: 'Mythic',
-			power: '1',
-			toughness: '3',	
-			set: 'VOW',
-			text: 'Flying, deathtouch, lifelink'	
-		}
+		currentCard,
+		setCurrentCard,
 	};
 
 	return (
