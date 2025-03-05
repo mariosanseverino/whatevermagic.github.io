@@ -41,7 +41,8 @@ export function CardProvider({ children }: ProviderProps) {
 		power: '1',
 		toughness: '3',	
 		set: 'VOW',
-		text: 'Flying, deathtouch, lifelink'	
+		text: 'Flying, deathtouch, lifelink',
+		id: 'mario'
 	});
 
 	const cardSettings = {
